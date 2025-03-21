@@ -261,18 +261,18 @@ def render_single(env, policy, max_steps=100):
 if __name__ == "__main__":
     # comment/uncomment these lines to switch between deterministic/stochastic environments
     # human render mode for the animation
-    env = gym.make("FrozenLake-v1", render_mode="human")
-    # env = gym.make("SlipperyFrozenLake-v1", render_mode="human")
+    # env = gym.make("FrozenLake-v1", render_mode="human")
+    env = gym.make("SlipperyFrozenLake-v1", render_mode="human")
 
     env = TimeLimit(env, max_episode_steps=100)
     P = env.P
     nS, nA = env.observation_space.n, env.action_space.n
 
-    # print("\n" + "-" * 25 + "\nBeginning Policy Iteration\n" + "-" * 25)
-    # V_pi, p_pi = policy_iteration(P, nS, nA, gamma=0.9, eps=1e-3)
-    # print(f"finish policy iteration: {V_pi} {p_pi}")
-    # render_single(env, p_pi, 100)
-    # print(p_pi)
+    print("\n" + "-" * 25 + "\nBeginning Policy Iteration\n" + "-" * 25)
+    V_pi, p_pi = policy_iteration(P, nS, nA, gamma=0.9, eps=1e-3)
+    print(f"finish policy iteration: {V_pi} {p_pi}")
+    render_single(env, p_pi, 100)
+    print(p_pi)
 
     print("\n" + "-" * 25 + "\nBeginning Value Iteration\n" + "-" * 25)
     V_vi, p_vi = value_iteration(P, nS, nA, gamma=0.9, eps=1e-3)
